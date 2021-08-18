@@ -1,0 +1,111 @@
+Language	English	Japanese	Korean	Chinese Simplified	Chinese Traditional
+sLanguageWarning			기계번역을 사용하고 있기 때문에 번역이 정확하지 않을 수 있습니다.	翻译可能不准确，因为使用了机器翻译。	翻譯可能不准確，因為使用了機器翻譯。
+sSelectMesh	1. Select the mesh	1. メッシュを選択してください	1. 메쉬를 선택해주세요	1. 请选择Mesh	1. 請選擇Mesh
+sGenerateAndSave	2. Generate the mesh, test it, then save	2. メッシュを生成してテストし、保存してください	2. 메쉬를 생성하고 테스트하고 저장하세요	2. 请生成并测试并保存Mesh	2. 請生成並測試並保存Mesh
+sEditMaterial	3. Edit and save the material	3. マテリアルを編集して保存してください	3. 머티리얼을 편집하여 저장하세요	3. 请编辑并保存Material	3. 請編輯並保存Material
+sMeshDD	Mesh (D&D from scene)	メッシュ (シーンからD&D)	Mesh (D&D from scene)	Mesh (D&D from scene)	Mesh (D&D from scene)
+sSubMeshList	Sub Meshes	サブメッシュ	서브메쉬	Sub Meshes	Sub Meshes
+sSubMeshNum	Mesh to generate fur	ファーを生成するメッシュ	퍼를 생성하는 메시	生成毛皮的Mesh	生成毛皮的Mesh
+sAutoSettingFromMaterial	Auto setting from material	マテリアルから自動設定	머티리얼을 사용하여 자동 설정	以Material为基础自动设定	以Material為基礎自動設定
+sLength	Length	長さ	길이	长度	長度
+sLengthMask	Length Mask	長さマスク	길이 마스크	长度蒙版	長度蒙版
+sVector	Vector	向き	방향	向量	向量
+sStrength	Strength	強度	강도	强度	強度
+sFrequency	Frequency	周期	주기	周期	週期
+sDetail	Detail	ディテール	디테일	细节	細節
+sNormalMapStrength	Normal Map Strength	ノーマルマップの強度	노멀 맵의 강도	法线贴图强度	法線貼圖強度
+sNormalMap	Normal Map	ノーマルマップ	노멀 맵	法线贴图	法線貼圖
+sRandomize	Randomize	ランダム化	임의화	随机化	隨機化
+sSoftnessMask	Softness Mask	柔らかさマスク	부드러움 마스크	柔软蒙版	柔軟蒙版
+sDensityMask	Density Mask	密度マスク	밀도 마스크	密度蒙版	密度蒙版
+sLayerNum	Layer Counts	レイヤー数	레이어 수	层数	層數
+sJointNum	Joint Counts	ジョイント数	조인트 수	连接数	連接數
+sHelpSelectMesh	Select a mesh object.	メッシュオブジェクトを選択してください。	메쉬 오브젝트를 선택하세요.	请选择网格对象。	請選擇網格對象。
+sHelpSelectFromScene	Select a mesh in the scene.	シーン内にあるメッシュを選択してください。	장면 안에 있는 메쉬를 선택해 주세요.	请选择场景中的Mesh。	請選擇場景中的Mesh。
+sOriginal	Original	本体	베이스	原始	原始
+sFurEstimated	Fur (Estimated)	ファー (推定値)	퍼 (추정치)	毛皮 (估计值)	毛皮 (估計值)
+sPolygons	Polygons	ポリゴン	폴리곤	Polygons	Polygons
+sHelpManyPolygons	Many polygons take a long time to process.	ポリゴン数が多いと処理に時間がかかります。	폴리곤수가많은경우처리에시간이걸립니다.	多边形多的情况下处理需要时间。	多邊形多的情況下處理需要時間。
+sGenerateTest	Generate & Test	生成 & テスト	생성 & 테스트	生成 & 测试	生成 & 測試
+sSaveMesh	Save Mesh	メッシュを保存	메쉬 저장	保存Mesh	保存Mesh
+sSaveMaterial	Save Material	マテリアルを保存	머티리얼 저장	保存Material	保存Material
+sAlreadySaved	Already saved	保存済み	보존 완료	已保存	已保存
+sNoVertices	Mesh cannot be generated because there are no vertices. Please fix the model import settings.	頂点が存在しないためメッシュを生成できません。モデルのインポート設定を修正してください。	꼭짓점이 존재하지 않아 메쉬를 생성할 수 없습니다. 모델 Import 설정을 변경해 주세요.	无法生成网格，因为不存在顶点。请更改模型的导入设置。	無法生成網格，因為不存在頂點。請更改模型的導入設置。
+sNoUV	Mesh cannot be generated because there are no UV. Please fix the model import settings.	UVが存在しないためメッシュを生成できません。モデルのインポート設定を修正してください。	UV이 존재하지 않아 메쉬를 생성할 수 없습니다. 모델 Import 설정을 변경해 주세요.	无法生成网格，因为不存在UV。请更改模型的导入设置。	無法生成網格，因為不存在UV。請更改模型的導入設置。
+sNoNormals	Mesh cannot be generated because there are no normals. Please fix the model import settings.	法線が存在しないためメッシュを生成できません。モデルのインポート設定を修正してください。	법선이 존재하지 않아 메쉬를 생성할 수 없습니다. 모델 Import 설정을 변경해 주세요.	无法生成网格，因为不存在法线。请更改模型的导入设置。	無法生成網格，因為不存在法線。請更改模型的導入設置。
+sNoTangents	Mesh cannot be generated because there are no tangents. Please fix the model import settings.	Tangentが存在しないためメッシュを生成できません。モデルのインポート設定を修正してください。	탄젠트이 존재하지 않아 메쉬를 생성할 수 없습니다. 모델 Import 설정을 변경해 주세요.	无法生成网格，因为不存在Tangents。请更改模型的导入设置。	無法生成網格，因為不存在Tangents。請更改模型的導入設置。
+sRenderingMode	Rendering Mode	透過モード	투명 모드	Rendering Mode	Rendering Mode
+sRenderingModeCutout	Cutout	カットアウト	컷아웃	镂空	鏤空
+sRenderingModeTransparent	Transparent	半透明	투명한	透明	透明
+sReset	Reset	初期化	초기화	重置	重置
+sColor	Color	色	색	颜色	顏色
+sTexture	Texture	テクスチャ	텍스처	纹理	紋理
+sTextureRGBA	Color (RGB) and Transparency (A)	色(RGB)と透明度(A)	색 (RGB) 과 투명도 (A)	颜色 (RGB) & 透明度 (A)	顏色 (RGB) & 透明度 (A)
+sBorder	Border	範囲	범위	边界	邊界
+sBlur	Blur	ぼかし	흐리게	模糊	模糊
+sAlphaA	Alpha (A)	透明度 (A)	투명도 (A)	透明度 (A)	透明度 (A)
+sBaseSetting	Base Setting	基本設定	기본 설정	基本设置	基本設置
+sAsUnlit	As Unlit	Unlit化	Unlit 화	作为Unlit	作為Unlit
+sUVSetting	UV Setting	UV設定	UV 설정	UV设置	UV設置
+sMapTexture	Texture	マップテクスチャ	맵 텍스처	映射纹理	映射紋理
+sCutoff	Cutoff	Cutoff (完全透明にする範囲)	Cutoff	Cutoff	Cutoff
+sCullMode	Cull Mode	Cull Mode (描画面)	Cull Mode	Cull Mode	Cull Mode
+sCullModeOff	Off	Off (両面を描画)	Off	Off	Off
+sCullModeFront	Front	Front (背面のみ描画)	Front	Front	Front
+sCullModeBack	Back	Back (前面のみ描画)	Back	Back	Back
+sClippingCanceller	Distance Clipping Canceller	距離クリッピングキャンセラー	거리 클리핑 취소 기	距离剪裁取消器	距離剪裁取消器
+sVertexLightStrength	Vertex Light Strength	頂点ライトの強度	Vertex Light Strength	Vertex Light Strength	Vertex Light Strength
+sLightMinLimit	Lower brightness limit	明るさの下限	Lower brightness limit	Lower brightness limit	Lower brightness limit
+sHelpCullMode	If the material does not look right, set the CullMode to Off or Back.	表示がおかしい場合はCullModeをOffもしくはBackにしてください	표시가 이상한 경우는 CullMode을 Off 또는 Back합니다	如果材质看起来不对，请将CullMode设置为Off或Back。	如果材質看起來不對，請將CullMode設置為Off或Back。
+sHelpZWrite	If the material does not look right, turn on ZWrite.	表示がおかしい場合はZWriteをオンにしてください	표시가 이상한 경우는 ZWrite을 선택하십시오	如果材质看起来不对，请打开ZWrite。	如果材質看起來不對，請打開ZWrite。
+sMainUV	UV Setting	UV設定	UV 설정	UV设置	UV設置
+sMainUVTips	You can set the UV position, scale and animation.	UVの位置やサイズ、アニメーションの設定ができます	UV의 위치 나 크기, 애니메이션을 설정할 수 있습니다	你可以设置UV位置、比例和动画。	你可以設置UV位置、比例和動畫。
+sMainColorSetting	Main Color	基本色設定	기본 색상 설정	主色设置	主色設置
+sMainColorTips	You can set the color and transparency.	色や透明度の設定ができます	색상과 투명도를 설정할 수 있습니다	你可以设置颜色和透明度。	你可以設置顏色和透明度。
+sMainColor	Main Color	メインカラー	메인 컬러	主色	主色
+sShadowSetting	Shadow	影設定	그림자 설정	阴影设置	陰影設置
+sShadowTips	You can set the color and range of the shadow.	影の色や範囲の設定ができます	그림자의 색상과 범위를 설정할 수 있습니다	你可以设置阴影的颜色和范围。	你可以設置陰影的顏色和範圍。
+sShadow	Shadow	影	그림자	阴影	陰影
+sReceiveShadow	Receive Shadow	影を受け取る	그림자를받는	接收阴影	接收陰影
+sShadowColor	ShadowColor	影色	그림자 색	阴影颜色	陰影顏色
+sShadowBorderColor	Border Color	境界の色	경계의 색	边界颜色	邊界顏色
+sShadowBorderRange	Border Range	境界の幅	경계의 폭	边界范围	邊界範圍
+sFurSetting	Fur	ファー設定	퍼 설정	毛皮设置	毛皮設置
+sFurTips	You can set the length and direction of the fur.	ファーの長さや向き、質感の設定ができます	퍼의 길이와 방향, 질감을 설정할 수 있습니다	你可以设置毛皮的长度和方向。	你可以設置毛皮的長度和方向。
+sFur	Fur	ファー	퍼	毛皮	毛皮
+sDensity	Density	密度	밀도	密度	密度
+sAO	AO	陰影	AO	AO	AO
+sAOColor	AO Color	陰影色	AO Color	AO Color	AO Color
+sGravity	Gravity	重力	중력	重力	重力
+sSoftness	Softness	柔らかさ	부드러움	柔软	柔軟
+sDistanceFade	Distance Fade	距離フェード	거리 페이드	距离淡化	距離淡化
+sDistanceFadeTips	You can set the color change depending on the distance.	距離に応じて色の変更ができます	거리에 따라 색상을 변경할 수 있습니다	你可以根据距离来设置颜色的变化。	你可以根據距離來設置顏色的變化。
+sStartDistance	Start Distance	開始距離	시작 거리	开始距离	開始距離
+sEndDistance	End Distance	終了距離	종료 거리	结束距离	結束距離
+sStencilSetting	Stencil	ステンシル設定	Stencil 설정	Stencil设置	Stencil設置
+sStencilTips	You can set the Stencil	ステンシル(眉毛を髪の上に表示するなど)の設定ができます	Stencil (눈썹을 머리 위에 표시하는 등)을 설정할 수 있습니다	你可以配置详细的Stencil设置。	你可以配置詳細的Stencil設置。
+sAdvanced	Advanced	拡張設定	확장 설정	扩展设置	擴展設置
+sRenderingSetting	Rendering	レンダリング設定	렌더링 설정	渲染设置	渲染設置
+sRenderingTips	You can configure detailed rendering settings.	細かいレンダリングの設定ができます。	세세한 렌더링 설정을 할 수 있습니다.	你可以配置详细的渲染设置。	你可以配置詳細的渲染設置。
+sZWrite	ZWrite	ZWrite	ZWrite	ZWrite	ZWrite
+sZTest	ZTest	ZTest	ZTest	ZTest	ZTest
+sOffsetFactor	Offset Factor	Offset Factor	Offset Factor	Offset Factor	Offset Factor
+sOffsetUnits	Offset Units	Offset Units	Offset Units	Offset Units	Offset Units
+sColorMask	Color Mask	Color Mask	Color Mask	Color Mask	Color Mask
+sForward	Forward	Forward	Forward	Forward	Forward
+sForwardAdd	ForwardAdd	ForwardAdd	ForwardAdd	ForwardAdd	ForwardAdd
+sSrcBlendRGB	SrcBlend RGB	SrcBlend RGB	SrcBlend RGB	SrcBlend RGB	SrcBlend RGB
+sDstBlendRGB	DstBlend RGB	DstBlend RGB	DstBlend RGB	DstBlend RGB	DstBlend RGB
+sSrcBlendAlpha	SrcBlend Alpha	SrcBlend Alpha	SrcBlend Alpha	SrcBlend Alpha	SrcBlend Alpha
+sDstBlendAlpha	DstBlend Alpha	DstBlend Alpha	DstBlend Alpha	DstBlend Alpha	DstBlend Alpha
+sBlendOpRGB	BlendOp RGB	BlendOp RGB	BlendOp RGB	BlendOp RGB	BlendOp RGB
+sBlendOpAlpha	BlendOp Alpha	BlendOp Alpha	BlendOp Alpha	BlendOp Alpha	BlendOp Alpha
+sRenderingReset	Reset Rendering Properties	レンダリング設定を初期化	렌더링 설정을 초기화	重置渲染设置	重置渲染設置
+sOptimization	Optimization	最適化	최적화	优化	優化
+sOptimizationTips	You can optimize the material to reduce the load.	マテリアルを最適化して負荷を低減できます	머티리얼을최적화하여부하를저감할수있습니다	你可以对材料进行优化，以减少负荷。	你可以對材料進行優化，以減少負荷。
+sRemoveUnused	Remove unused textures	未使用のテクスチャを外す	미사용 텍스처 해제	移除未使用的纹理	移除未使用的紋理
+sYes	Yes	はい	Yes	Yes	Yes
+sNo	No	いいえ	No	No	No
+sOK	OK	OK	OK	OK	OK
+sCancel	Cancel	キャンセル	Cancel	Cancel	Cancel
+sComplete	Complete!	完了しました。	Complete!	Complete!	Complete!
