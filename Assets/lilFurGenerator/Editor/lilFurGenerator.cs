@@ -72,21 +72,21 @@ namespace lilFurGenerator
             GUIStyle customBox       = GUI.skin.box;
             GUIStyle customToggleFont = EditorStyles.label;
             GUIStyle offsetButton = new GUIStyle(GUI.skin.button);
-            string mainFolderPath = GetMainFolderPath();
+            string editorFolderPath = GetEditorFolderPath();
             if(EditorGUIUtility.isProSkin)
             {
-                boxOuter        = new GUIStyle(((GUISkin)AssetDatabase.LoadAssetAtPath(mainFolderPath + "/Editor/gui_box_outer_2019.guiskin", typeof(GUISkin))).box);
-                boxInnerHalf    = new GUIStyle(((GUISkin)AssetDatabase.LoadAssetAtPath(mainFolderPath + "/Editor/gui_box_inner_half_2019.guiskin", typeof(GUISkin))).box);
-                boxInner        = new GUIStyle(((GUISkin)AssetDatabase.LoadAssetAtPath(mainFolderPath + "/Editor/gui_box_inner_2019.guiskin", typeof(GUISkin))).box);
-                customBox       = new GUIStyle(((GUISkin)AssetDatabase.LoadAssetAtPath(mainFolderPath + "/Editor/gui_custom_box_2019.guiskin", typeof(GUISkin))).box);
+                boxOuter        = new GUIStyle(((GUISkin)AssetDatabase.LoadAssetAtPath(editorFolderPath + "/gui_box_outer_2019.guiskin", typeof(GUISkin))).box);
+                boxInnerHalf    = new GUIStyle(((GUISkin)AssetDatabase.LoadAssetAtPath(editorFolderPath + "/gui_box_inner_half_2019.guiskin", typeof(GUISkin))).box);
+                boxInner        = new GUIStyle(((GUISkin)AssetDatabase.LoadAssetAtPath(editorFolderPath + "/gui_box_inner_2019.guiskin", typeof(GUISkin))).box);
+                customBox       = new GUIStyle(((GUISkin)AssetDatabase.LoadAssetAtPath(editorFolderPath + "/gui_custom_box_2019.guiskin", typeof(GUISkin))).box);
                 customToggleFont = EditorStyles.label;
                 offsetButton.margin.left = 24;
             }
             else
             {
-                boxOuter        = new GUIStyle(((GUISkin)AssetDatabase.LoadAssetAtPath(mainFolderPath + "/Editor/gui_box_outer_2018.guiskin", typeof(GUISkin))).box);
-                boxInnerHalf    = new GUIStyle(((GUISkin)AssetDatabase.LoadAssetAtPath(mainFolderPath + "/Editor/gui_box_inner_half_2018.guiskin", typeof(GUISkin))).box);
-                boxInner        = new GUIStyle(((GUISkin)AssetDatabase.LoadAssetAtPath(mainFolderPath + "/Editor/gui_box_inner_2018.guiskin", typeof(GUISkin))).box);
+                boxOuter        = new GUIStyle(((GUISkin)AssetDatabase.LoadAssetAtPath(editorFolderPath + "/gui_box_outer_2018.guiskin", typeof(GUISkin))).box);
+                boxInnerHalf    = new GUIStyle(((GUISkin)AssetDatabase.LoadAssetAtPath(editorFolderPath + "/gui_box_inner_half_2018.guiskin", typeof(GUISkin))).box);
+                boxInner        = new GUIStyle(((GUISkin)AssetDatabase.LoadAssetAtPath(editorFolderPath + "/gui_box_inner_2018.guiskin", typeof(GUISkin))).box);
                 customBox       = GUI.skin.box;
                 customToggleFont = new GUIStyle();
                 customToggleFont.normal.textColor = Color.white;
