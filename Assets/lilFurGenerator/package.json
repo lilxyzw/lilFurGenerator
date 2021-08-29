@@ -1,7 +1,7 @@
 {
   "name": "jp.lilxyzw.lilfurgenerator",
   "displayName": "lilFurGenerator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "unity": "2017.1",
   "description": "Fur generator for Unity.",
   "keywords": ["Fur", "Shader", "Material"],

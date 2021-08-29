@@ -19,7 +19,8 @@ float lilTooning(float value, float border, float blur, float borderRange)
 
 float4 lilOptMul(float4x4 mat, float3 pos)
 {
-    return mat._m00_m10_m20_m30 * pos.x + (mat._m01_m11_m21_m31 * pos.y + (mat._m02_m12_m22_m32 * pos.z + mat._m03_m13_m23_m33));
+    return mul(mat, float4(pos,1.0));
+    //return mat._m00_m10_m20_m30 * pos.x + (mat._m01_m11_m21_m31 * pos.y + (mat._m02_m12_m22_m32 * pos.z + mat._m03_m13_m23_m33));
 }
 
 float3 lilTransformNormalOStoWS(float3 normalOS)
@@ -172,6 +173,23 @@ void CalcFur(inout float3 positionWS, float3 normalOS, float4 tangentOS, float4 
         float motionStrength = pow(abs(uv4.y),1.0/max(softness,0.001)) * softness * furLength;
     #else
         float motionStrength = _FurSoftness * color.w * furLength;
+    #endif
+
+    // Touch
+    #if defined(LIL_FUR_HQ) && defined(VERTEXLIGHT_ON)
+        float3 vectorWS2 = normalize(vectorWS + motionWS * motionStrength) * (furLength * _FurLength * uv4.y);
+        float3 positionWS2 = uv4.y > -0.5 ? positionWS + vectorWS2 : positionWS;
+        float4 toLightX = unity_4LightPosX0 - positionWS2.x;
+        float4 toLightY = unity_4LightPosY0 - positionWS2.y;
+        float4 toLightZ = unity_4LightPosZ0 - positionWS2.z;
+        float4 lengthSq = toLightX * toLightX + 0.000001;
+        lengthSq += toLightY * toLightY;
+        lengthSq += toLightZ * toLightZ;
+        float4 atten = saturate(1.0 - lengthSq * unity_4LightAtten0 / 25.0) * _FurTouchStrength;
+        motionWS = abs(unity_LightColor[0].a - 0.055) < 0.001 ? motionWS - float3(toLightX[0], toLightY[0], toLightZ[0]) * rsqrt(lengthSq[0]) * atten[0] : motionWS;
+        motionWS = abs(unity_LightColor[1].a - 0.055) < 0.001 ? motionWS - float3(toLightX[1], toLightY[1], toLightZ[1]) * rsqrt(lengthSq[1]) * atten[1] : motionWS;
+        motionWS = abs(unity_LightColor[2].a - 0.055) < 0.001 ? motionWS - float3(toLightX[2], toLightY[2], toLightZ[2]) * rsqrt(lengthSq[2]) * atten[2] : motionWS;
+        motionWS = abs(unity_LightColor[3].a - 0.055) < 0.001 ? motionWS - float3(toLightX[3], toLightY[3], toLightZ[3]) * rsqrt(lengthSq[3]) * atten[3] : motionWS;
     #endif
 
     // Blend

@@ -117,7 +117,7 @@ Shader "_lil/FurGeneratorToon"
             #pragma fragmentoption ARB_precision_hint_fastest
 
             // Skip receiving shadow
-            //#pragma skip_variants SHADOWS_SCREEN
+            #pragma skip_variants SHADOWS_SCREEN
 
             //------------------------------------------------------------------------------------------------------------------
             // Pass
@@ -290,8 +290,8 @@ Shader "_lil/FurGeneratorToon"
             #pragma multi_compile _ DOTS_INSTANCING_ON
 
             // Skip receiving shadow
-            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
-            #pragma multi_compile_fragment _ _SHADOWS_SOFT
+            //#pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
+            //#pragma multi_compile_fragment _ _SHADOWS_SOFT
 
             //------------------------------------------------------------------------------------------------------------------
             // Pass
@@ -434,8 +434,8 @@ Shader "_lil/FurGeneratorToon"
             #pragma multi_compile_instancing
 
             // Skip receiving shadow
-            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
-            #pragma multi_compile_fragment _ _SHADOWS_SOFT
+            //#pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
+            //#pragma multi_compile_fragment _ _SHADOWS_SOFT
 
             //------------------------------------------------------------------------------------------------------------------
             // Pass
@@ -587,8 +587,8 @@ Shader "_lil/FurGeneratorToon"
             #pragma multi_compile _ DOTS_INSTANCING_ON
 
             // Skip receiving shadow
-            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
-            #pragma multi_compile_fragment _ _SHADOWS_SOFT
+            //#pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
+            //#pragma multi_compile_fragment _ _SHADOWS_SOFT
 
             //------------------------------------------------------------------------------------------------------------------
             // Pass
@@ -758,8 +758,8 @@ Shader "_lil/FurGeneratorToon"
             #pragma multi_compile_instancing
 
             // Skip receiving shadow
-            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
-            #pragma multi_compile_fragment _ _SHADOWS_SOFT
+            //#pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
+            //#pragma multi_compile_fragment _ _SHADOWS_SOFT
 
             //------------------------------------------------------------------------------------------------------------------
             // Pass

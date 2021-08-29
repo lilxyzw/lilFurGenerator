@@ -11,8 +11,10 @@ sLength	Length	長さ	길이	长度	長度
 sLengthMask	Length Mask	長さマスク	길이 마스크	长度蒙版	長度蒙版
 sVector	Vector	向き	방향	向量	向量
 sStrength	Strength	強度	강도	强度	強度
+sAdvProperties	Advanced Properties	拡張設定	확장 설정	扩展设置	擴展設置
 sFrequency	Frequency	周期	주기	周期	週期
 sDetail	Detail	ディテール	디테일	细节	細節
+sTouchStrength	Touch strength	接触強度	접촉 강도	接触强度	接觸強度
 sNormalMapStrength	Normal Map Strength	ノーマルマップの強度	노멀 맵의 강도	法线贴图强度	法線貼圖強度
 sNormalMap	Normal Map	ノーマルマップ	노멀 맵	法线贴图	法線貼圖
 sRandomize	Randomize	ランダム化	임의화	随机化	隨機化
@@ -109,3 +111,10 @@ sNo	No	いいえ	No	No	No
 sOK	OK	OK	OK	OK	OK
 sCancel	Cancel	キャンセル	Cancel	Cancel	Cancel
 sComplete	Complete!	完了しました。	Complete!	Complete!	Complete!
+sShaderSetting	Shader Setting (for all materials)	シェーダー設定 (全マテリアル共通)	쉐이더 설정 (전체 재료 공통)	着色器设置（用于所有材质）	著色器設置（用於所有材質）
+sShaderSettingTips	You can toggle unused functions.	不要な機能を無効化できます	불필요한 기능을 비활성화 할 수 있습니다	你可以切换不使用的功能。	你可以切換不使用的功能。
+sHelpShaderSetting	Features turned off here will be removed from the shader. By turning off unused features, you can reduce the size of your avatar while also reducing the load.	ここでオフにした機能はシェーダーから除去されます。不要な機能をオフにすることでアバターの容量を削減しつつ、負荷も抑えることができます。	여기에 끈 기능은 쉐이더에서 제거됩니다. 불필요한 기능을 해제하여 아바타의 용량을 줄이면서 부하도 줄일 수 있습니다.	在这里关闭的功能将从着色器中删除。通过关闭不使用的功能，你可以减少你的头像的大小，同时也可以减少负载。	在這里關閉的功能將從著色器中刪除。通過關閉不使用的功能，你可以減少你的頭像的大小，同時也可以減少負載。​​
+sSettingShadow	Shadow	影	그림자	阴影	陰影
+sSettingReceiveShadow	Receive Shadow	影の受け取り	그림자 받고	接收阴影	接收陰影
+sSettingClippingCanceller	Distance Clipping Canceller	距離クリッピングキャンセラー	거리 클리핑 취소 기	距离剪裁取消器	距離剪裁取消器
+sSettingDistanceFade	Distance Fade	距離フェード	거리 페이드	距离淡化	距離淡化

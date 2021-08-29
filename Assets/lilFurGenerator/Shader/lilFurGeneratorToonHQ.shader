@@ -41,6 +41,7 @@ Shader "_lil/FurGeneratorToonHQ"
         [lilVec3Float]  _FurWindMove1               ("Wind Strength 1|Wind Detail 1", Vector) = (0.05, 0.05, 0.05, 1.0)
         [lilVec3]       _FurWindFreq2               ("Wind Freq 2", Vector) = (10.0, 14.0, 18.0, 1.0)
         [lilVec3Float]  _FurWindMove2               ("Wind Strength 2|Wind Detail 2", Vector) = (0.0025, 0.0025, 0.0025, 5000.0)
+                        _FurTouchStrength           ("Fur Touch Strength", Range(0,1)) = 0
 
         //----------------------------------------------------------------------------------------------------------------------
         // Advanced
@@ -122,7 +123,7 @@ Shader "_lil/FurGeneratorToonHQ"
             #pragma fragmentoption ARB_precision_hint_fastest
 
             // Skip receiving shadow
-            //#pragma skip_variants SHADOWS_SCREEN
+            #pragma skip_variants SHADOWS_SCREEN
 
             //------------------------------------------------------------------------------------------------------------------
             // Pass
@@ -296,8 +297,8 @@ Shader "_lil/FurGeneratorToonHQ"
             #pragma multi_compile _ DOTS_INSTANCING_ON
 
             // Skip receiving shadow
-            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
-            #pragma multi_compile_fragment _ _SHADOWS_SOFT
+            //#pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
+            //#pragma multi_compile_fragment _ _SHADOWS_SOFT
 
             //------------------------------------------------------------------------------------------------------------------
             // Pass
@@ -440,8 +441,8 @@ Shader "_lil/FurGeneratorToonHQ"
             #pragma multi_compile_instancing
 
             // Skip receiving shadow
-            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
-            #pragma multi_compile_fragment _ _SHADOWS_SOFT
+            //#pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
+            //#pragma multi_compile_fragment _ _SHADOWS_SOFT
 
             //------------------------------------------------------------------------------------------------------------------
             // Pass
@@ -594,8 +595,8 @@ Shader "_lil/FurGeneratorToonHQ"
             #pragma multi_compile _ DOTS_INSTANCING_ON
 
             // Skip receiving shadow
-            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
-            #pragma multi_compile_fragment _ _SHADOWS_SOFT
+            //#pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
+            //#pragma multi_compile_fragment _ _SHADOWS_SOFT
 
             //------------------------------------------------------------------------------------------------------------------
             // Pass
@@ -748,8 +749,8 @@ Shader "_lil/FurGeneratorToonHQ"
             #pragma multi_compile_instancing
 
             // Skip receiving shadow
-            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
-            #pragma multi_compile_fragment _ _SHADOWS_SOFT
+            //#pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
+            //#pragma multi_compile_fragment _ _SHADOWS_SOFT
 
             //------------------------------------------------------------------------------------------------------------------
             // Pass

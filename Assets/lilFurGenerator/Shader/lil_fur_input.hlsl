@@ -31,6 +31,9 @@ CBUFFER_START(UnityPerMaterial)
     float   _FurAO;
     float   _FurDensity;
     float   _FurSoftness;
+    #if defined(LIL_FUR_HQ)
+        float   _FurTouchStrength;
+    #endif
     uint    _UseClippingCanceller;
     uint    _ShadowReceive;
 CBUFFER_END

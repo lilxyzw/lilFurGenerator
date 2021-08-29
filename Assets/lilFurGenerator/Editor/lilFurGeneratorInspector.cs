@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace lilFurGenerator
 {
@@ -21,16 +22,18 @@ namespace lilFurGenerator
 
         //------------------------------------------------------------------------------------------------------------------------------
         // Constant
-        public const string currentVersionName = "1.0.0";
-        public const int currentVersionValue = 1;
+        public const string currentVersionName = "1.0.1";
+        public const int currentVersionValue = 2;
 
         public const string boothURL                = "https://lilxyzw.booth.pm/";
         public const string githubURL               = "https://github.com/lilxyzw/lilFurGenerator";
         public const string versionInfoURL          = "https://raw.githubusercontent.com/lilxyzw/lilFurGenerator/master/version.json";
         public const string editorFolderGUID        = "59970fc0d266132478e5327940963258"; // "Assets/lilFurGenerator/Editor"
         public const string languageFileGUID        = "31b8eeba6110d59439de5782850a4574"; // "Assets/lilFurGenerator/Editor/lang.txt"
-        public const string fgShaderGUID            = "2c540356c3ded7340b263ceb4ace7e37"; // "Assets/lilFurGenerator/Shader/lilFurGenerator.shader"
-        public const string hqfgShaderGUID          = "7fc1943976840044e82d0503f1f70d23"; // "Assets/lilFurGenerator/Shader/lilFurGenerator.shader"
+        public const string fgShaderGUID            = "2c540356c3ded7340b263ceb4ace7e37"; // "Assets/lilFurGenerator/Shader/lilFurGeneratorToon.shader"
+        public const string hqfgShaderGUID          = "7fc1943976840044e82d0503f1f70d23"; // "Assets/lilFurGenerator/Shader/lilFurGeneratorToonHQ.shader"
+        public const string ShaderSettingGUID       = "13cb99d89b41fd9428d5101d176b6408"; // "Assets/lilFurGenerator/Editor/ShaderSetting.asset"
+        public const string ShaderSettingHLSLGUID   = "f79e08f45a0f3b640b563a49ff855b0c"; // "Assets/lilFurGenerator/Shader/lil_fur_setting.hlsl"
         public const string editorSettingTempPath   = "Temp/lilFurGeneratorEditorSetting";
         public const string versionInfoTempPath     = "Temp/lilFurGeneratorVersion";
         public const string windowName = "lilFurGenerator";
@@ -40,6 +43,16 @@ namespace lilFurGenerator
             return AssetDatabase.GUIDToAssetPath(editorFolderGUID);
         }
 
+        public static string GetShaderSettingPath()
+        {
+            return AssetDatabase.GUIDToAssetPath(ShaderSettingGUID);
+        }
+
+        public static string GetShaderSettingHLSLPath()
+        {
+            return AssetDatabase.GUIDToAssetPath(ShaderSettingHLSLGUID);
+        }
+
         public static readonly Vector2 defaultTextureOffset = new Vector2(0.0f,0.0f);
         public static readonly Vector2 defaultTextureScale = new Vector2(1.0f,1.0f);
         public static readonly Vector4 defaultDistanceFadeParams = new Vector4(0.1f,0.01f,0.0f,0.0f);
@@ -47,6 +60,7 @@ namespace lilFurGenerator
 
         //------------------------------------------------------------------------------------------------------------------------------
         // Editor
+        static lilFurGeneratorSetting shaderSetting;
         public static Dictionary<string, string> loc = new Dictionary<string, string>();
 
         [Serializable]
@@ -67,6 +81,8 @@ namespace lilFurGenerator
             public bool isShowBlendAdd          = false;
             public bool isShowWebPages          = false;
             public bool isShowAdvanced          = false;
+            public bool isShowShaderSetting     = false;
+            public bool isShaderSettingChanged  = false;
 
             // for generator window
             public GameObject gameObject;
@@ -157,6 +173,7 @@ namespace lilFurGenerator
             MaterialProperty furWindMove1;
             MaterialProperty furWindFreq2;
             MaterialProperty furWindMove2;
+            MaterialProperty furTouchStrength;
 
         //------------------------------------------------------------------------------------------------------------------------------
         // GUI
@@ -200,6 +217,7 @@ namespace lilFurGenerator
             //------------------------------------------------------------------------------------------------------------------------------
             // Initialize Setting
             ApplyEditorSettingTemp();
+            InitializeShaderSetting(ref shaderSetting);
 
             //------------------------------------------------------------------------------------------------------------------------------
             // Load Material
@@ -250,7 +268,7 @@ namespace lilFurGenerator
                         EditorGUILayout.HelpBox(GetLoc("sHelpZWrite"),MessageType.Warning);
                     }
                     EditorGUI.indentLevel--;
-                materialEditor.ShaderProperty(useClippingCanceller, GetLoc("sClippingCanceller"));
+                if(shaderSetting.LIL_FEATURE_CLIPPING_CANCELLER) materialEditor.ShaderProperty(useClippingCanceller, GetLoc("sClippingCanceller"));
                 DrawLine();
                 materialEditor.ShaderProperty(asUnlit, GetLoc("sAsUnlit"));
                 materialEditor.ShaderProperty(vertexLightStrength, GetLoc("sVertexLightStrength"));
@@ -292,24 +310,27 @@ namespace lilFurGenerator
 
             //------------------------------------------------------------------------------------------------------------------------------
             // Shadow
-            edSet.isShowShadow = Foldout(GetLoc("sShadowSetting"), GetLoc("sShadowTips"), edSet.isShowShadow);
-            if(edSet.isShowShadow)
+            if(shaderSetting.LIL_FEATURE_SHADOW)
             {
-                EditorGUILayout.BeginVertical(boxOuter);
-                EditorGUILayout.LabelField(GetLoc("sShadow"), customToggleFont);
-                EditorGUILayout.BeginVertical(boxInnerHalf);
-                materialEditor.ShaderProperty(shadowColor, GetLoc("sShadowColor"));
-                materialEditor.ShaderProperty(shadowBorder, GetLoc("sBorder"));
-                materialEditor.ShaderProperty(shadowBlur, GetLoc("sBlur"));
-                DrawLine();
-                materialEditor.ShaderProperty(shadowBorderColor, GetLoc("sShadowBorderColor"));
-                materialEditor.ShaderProperty(shadowBorderRange, GetLoc("sShadowBorderRange"));
-                materialEditor.ShaderProperty(shadowReceive, GetLoc("sReceiveShadow"));
-                EditorGUILayout.EndVertical();
-                EditorGUILayout.EndVertical();
-            }
+                edSet.isShowShadow = Foldout(GetLoc("sShadowSetting"), GetLoc("sShadowTips"), edSet.isShowShadow);
+                if(edSet.isShowShadow)
+                {
+                    EditorGUILayout.BeginVertical(boxOuter);
+                    EditorGUILayout.LabelField(GetLoc("sShadow"), customToggleFont);
+                    EditorGUILayout.BeginVertical(boxInnerHalf);
+                    materialEditor.ShaderProperty(shadowColor, GetLoc("sShadowColor"));
+                    materialEditor.ShaderProperty(shadowBorder, GetLoc("sBorder"));
+                    materialEditor.ShaderProperty(shadowBlur, GetLoc("sBlur"));
+                    DrawLine();
+                    materialEditor.ShaderProperty(shadowBorderColor, GetLoc("sShadowBorderColor"));
+                    materialEditor.ShaderProperty(shadowBorderRange, GetLoc("sShadowBorderRange"));
+                    if(shaderSetting.LIL_FEATURE_RECEIVE_SHADOW) materialEditor.ShaderProperty(shadowReceive, GetLoc("sReceiveShadow"));
+                    EditorGUILayout.EndVertical();
+                    EditorGUILayout.EndVertical();
+                }
 
-            EditorGUILayout.Space();
+                EditorGUILayout.Space();
+            }
 
             //------------------------------------------------------------------------------------------------------------------------------
             // Advanced
@@ -317,16 +338,19 @@ namespace lilFurGenerator
 
             //------------------------------------------------------------------------------------------------------------------------------
             // Distance Fade
-            edSet.isShowDistanceFade = Foldout(GetLoc("sDistanceFade"), GetLoc("sDistanceFadeTips"), edSet.isShowDistanceFade);
-            if(edSet.isShowDistanceFade)
+            if(shaderSetting.LIL_FEATURE_DISTANCE_FADE)
             {
-                EditorGUILayout.BeginVertical(boxOuter);
-                EditorGUILayout.LabelField(GetLoc("sDistanceFade"), customToggleFont);
-                EditorGUILayout.BeginVertical(boxInnerHalf);
-                materialEditor.ShaderProperty(distanceFadeColor, GetLoc("sColor"));
-                materialEditor.ShaderProperty(distanceFade, GetLoc("sStartDistance")+"|"+GetLoc("sEndDistance")+"|"+GetLoc("sStrength"));
-                EditorGUILayout.EndVertical();
-                EditorGUILayout.EndVertical();
+                edSet.isShowDistanceFade = Foldout(GetLoc("sDistanceFade"), GetLoc("sDistanceFadeTips"), edSet.isShowDistanceFade);
+                if(edSet.isShowDistanceFade)
+                {
+                    EditorGUILayout.BeginVertical(boxOuter);
+                    EditorGUILayout.LabelField(GetLoc("sDistanceFade"), customToggleFont);
+                    EditorGUILayout.BeginVertical(boxInnerHalf);
+                    materialEditor.ShaderProperty(distanceFadeColor, GetLoc("sColor"));
+                    materialEditor.ShaderProperty(distanceFade, GetLoc("sStartDistance")+"|"+GetLoc("sEndDistance")+"|"+GetLoc("sStrength"));
+                    EditorGUILayout.EndVertical();
+                    EditorGUILayout.EndVertical();
+                }
             }
 
             //------------------------------------------------------------------------------------------------------------------------------
@@ -345,7 +369,7 @@ namespace lilFurGenerator
                 materialEditor.ShaderProperty(furAO, GetLoc("sAO"));
                 materialEditor.ShaderProperty(furAOColor, GetLoc("sAOColor"));
                 DrawLine();
-                bool isHQ2 = EditorGUILayout.Toggle("Use Wind", isHQ);
+                bool isHQ2 = EditorGUILayout.Toggle(GetLoc("sAdvProperties"), isHQ);
                 if(isHQ != isHQ2)
                 {
                     material.shader = isHQ2 ? fchq : fc;
@@ -360,6 +384,8 @@ namespace lilFurGenerator
                     EditorGUILayout.LabelField("Wind 2", EditorStyles.boldLabel);
                     materialEditor.ShaderProperty(furWindFreq2, GetLoc("sFrequency"));
                     materialEditor.ShaderProperty(furWindMove2, GetLoc("sStrength") + "|" + GetLoc("sDetail"));
+                    DrawLine();
+                    materialEditor.ShaderProperty(furTouchStrength, GetLoc("sTouchStrength"));
                     EditorGUI.indentLevel--;
                 }
                 EditorGUILayout.EndVertical();
@@ -497,6 +523,20 @@ namespace lilFurGenerator
                 EditorGUILayout.EndVertical();
             }
 
+            //------------------------------------------------------------------------------------------------------------------------------
+            // Shader Setting
+            edSet.isShowShaderSetting = Foldout(GetLoc("sShaderSetting"), GetLoc("sShaderSettingTips"), edSet.isShowShaderSetting);
+            if(edSet.isShowShaderSetting)
+            {
+                EditorGUILayout.BeginVertical(boxOuter);
+                EditorGUILayout.LabelField(GetLoc("sShaderSetting"), customToggleFont);
+                EditorGUILayout.BeginVertical(boxInnerHalf);
+                EditorGUILayout.HelpBox(GetLoc("sHelpShaderSetting"),MessageType.Info);
+                ShaderSettingGUI();
+                EditorGUILayout.EndVertical();
+                EditorGUILayout.EndVertical();
+            }
+
             SaveEditorSettingTemp();
         }
 
@@ -563,6 +603,7 @@ namespace lilFurGenerator
             furWindMove1 = FindProperty("_FurWindMove1", props);
             furWindFreq2 = FindProperty("_FurWindFreq2", props);
             furWindMove2 = FindProperty("_FurWindMove2", props);
+            furTouchStrength = FindProperty("_FurTouchStrength", props);
         }
 
         //------------------------------------------------------------------------------------------------------------------------------
@@ -869,6 +910,144 @@ namespace lilFurGenerator
             }
 
             return lnum;
+        }
+
+        public static void InitializeShaderSetting(ref lilFurGeneratorSetting shaderSetting)
+        {
+            if(shaderSetting != null) return;
+            string shaderSettingPath = GetShaderSettingPath();
+            shaderSetting = (lilFurGeneratorSetting)AssetDatabase.LoadAssetAtPath(shaderSettingPath, typeof(lilFurGeneratorSetting));
+            if(shaderSetting == null)
+            {
+                shaderSetting = ScriptableObject.CreateInstance<lilFurGeneratorSetting>();
+                AssetDatabase.CreateAsset(shaderSetting, shaderSettingPath);
+                shaderSetting.LIL_FEATURE_SHADOW = true;
+                shaderSetting.LIL_FEATURE_RECEIVE_SHADOW = false;
+                shaderSetting.LIL_FEATURE_CLIPPING_CANCELLER = false;
+                shaderSetting.LIL_FEATURE_DISTANCE_FADE = false;
+                EditorUtility.SetDirty(shaderSetting);
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
+            }
+        }
+
+        static void ShaderSettingGUI()
+        {
+            GUIStyle applyButton = new GUIStyle(GUI.skin.button);
+            applyButton.normal.textColor = Color.red;
+            applyButton.fontStyle = FontStyle.Bold;
+
+            // Apply Button
+            if(edSet.isShaderSettingChanged && GUILayout.Button("Apply", applyButton))
+            {
+                ApplyShaderSetting(shaderSetting);
+                edSet.isShaderSettingChanged = false;
+            }
+            DrawLine();
+
+            EditorGUI.BeginChangeCheck();
+
+            lilToggleGUI(GetLoc("sSettingShadow"), ref shaderSetting.LIL_FEATURE_SHADOW);
+            if(shaderSetting.LIL_FEATURE_SHADOW)
+            {
+                EditorGUI.indentLevel++;
+                lilToggleGUI(GetLoc("sSettingReceiveShadow"), ref shaderSetting.LIL_FEATURE_RECEIVE_SHADOW);
+                EditorGUI.indentLevel--;
+            }
+            DrawLine();
+
+            lilToggleGUI(GetLoc("sSettingClippingCanceller"), ref shaderSetting.LIL_FEATURE_CLIPPING_CANCELLER);
+            DrawLine();
+
+            lilToggleGUI(GetLoc("sSettingDistanceFade"), ref shaderSetting.LIL_FEATURE_DISTANCE_FADE);
+
+            if(EditorGUI.EndChangeCheck())
+            {
+                edSet.isShaderSettingChanged = true;
+                EditorUtility.SetDirty(shaderSetting);
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
+            }
+        }
+
+        static void lilToggleGUI(string label, ref bool value)
+        {
+            value = EditorGUILayout.ToggleLeft(label, value);
+        }
+
+        public static void ApplyShaderSetting(lilFurGeneratorSetting shaderSetting)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("#ifndef LIL_FUR_SETTING_INCLUDED\r\n#define LIL_FUR_SETTING_INCLUDED\r\n\r\n");
+            if(shaderSetting.LIL_FEATURE_SHADOW)
+            {
+                sb.Append("#define LIL_FEATURE_SHADOW\r\n");
+                if(shaderSetting.LIL_FEATURE_RECEIVE_SHADOW) sb.Append("#define LIL_FEATURE_RECEIVE_SHADOW\r\n");
+            }
+            if(shaderSetting.LIL_FEATURE_CLIPPING_CANCELLER) sb.Append("#define LIL_FEATURE_CLIPPING_CANCELLER\r\n");
+            if(shaderSetting.LIL_FEATURE_DISTANCE_FADE) sb.Append("#define LIL_FEATURE_DISTANCE_FADE\r\n");
+            sb.Append("\r\n#endif");
+            string shaderSettingString = sb.ToString();
+
+            string shaderSettingStringBuf = "";
+            string shaderSettingHLSLPath = GetShaderSettingHLSLPath();
+            if(File.Exists(shaderSettingHLSLPath))
+            {
+                StreamReader sr = new StreamReader(shaderSettingHLSLPath);
+                shaderSettingStringBuf = sr.ReadToEnd();
+                sr.Close();
+            }
+
+            if(shaderSettingString != shaderSettingStringBuf)
+            {
+                StreamWriter sw = new StreamWriter(shaderSettingHLSLPath,false);
+                sw.Write(shaderSettingString);
+                sw.Close();
+                RewriteReceiveShadow(AssetDatabase.GUIDToAssetPath(fgShaderGUID), shaderSetting.LIL_FEATURE_SHADOW && shaderSetting.LIL_FEATURE_RECEIVE_SHADOW);
+                RewriteReceiveShadow(AssetDatabase.GUIDToAssetPath(hqfgShaderGUID), shaderSetting.LIL_FEATURE_SHADOW && shaderSetting.LIL_FEATURE_RECEIVE_SHADOW);
+                AssetDatabase.SaveAssets();
+                AssetDatabase.ImportAsset(shaderSettingHLSLPath);
+                AssetDatabase.Refresh();
+            }
+        }
+
+        static void RewriteReceiveShadow(string path, bool enable)
+        {
+            if(String.IsNullOrEmpty(path) || !File.Exists(path)) return;
+            StreamReader sr = new StreamReader(path);
+            string s = sr.ReadToEnd();
+            sr.Close();
+            if(enable)
+            {
+                // BRP
+                s = s.Replace(
+                    "            // Skip receiving shadow\r\n            #pragma skip_variants SHADOWS_SCREEN",
+                    "            // Skip receiving shadow\r\n            //#pragma skip_variants SHADOWS_SCREEN");
+                // LWRP & URP
+                s = s.Replace(
+                    "            // Skip receiving shadow\r\n            //#pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN\r\n            //#pragma multi_compile_fragment _ _SHADOWS_SOFT",
+                    "            // Skip receiving shadow\r\n            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN\r\n            #pragma multi_compile_fragment _ _SHADOWS_SOFT");
+            }
+            else
+            {
+                // BRP
+                s = s.Replace(
+                    "            // Skip receiving shadow\r\n            //#pragma skip_variants SHADOWS_SCREEN",
+                    "            // Skip receiving shadow\r\n            #pragma skip_variants SHADOWS_SCREEN");
+                // LWRP & URP
+                s = s.Replace(
+                    "            // Skip receiving shadow\r\n            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN\r\n            #pragma multi_compile_fragment _ _SHADOWS_SOFT",
+                    "            // Skip receiving shadow\r\n            //#pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN\r\n            //#pragma multi_compile_fragment _ _SHADOWS_SOFT");
+            }
+            StreamWriter sw = new StreamWriter(path,false);
+            sw.Write(s);
+            sw.Close();
+        }
+
+        static void RewriteReceiveShadow(Shader shader, bool enable)
+        {
+            string path = AssetDatabase.GetAssetPath(shader);
+            RewriteReceiveShadow(path, enable);
         }
 
         //------------------------------------------------------------------------------------------------------------------------------

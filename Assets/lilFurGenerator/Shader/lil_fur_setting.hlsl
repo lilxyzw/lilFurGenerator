@@ -1,0 +1,6 @@
+#ifndef LIL_FUR_SETTING_INCLUDED
+#define LIL_FUR_SETTING_INCLUDED
+
+#define LIL_FEATURE_SHADOW
+
+#endif

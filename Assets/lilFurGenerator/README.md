@@ -1,5 +1,5 @@
 # lilFurGenerator
-Version 1.0.0
+Version 1.0.1
 
 # Overview
 A plug-in that generates a fur mesh.  
@@ -37,6 +37,25 @@ lilFurGenerator is available under the MIT License. Please refer to the `LICENSE
 
 Select and edit materials for change advanced settings.
 
+# Advanced Properties
+|Name|Description|
+|-|-|
+|Frequency|Wind frequency of each XYZ axes.|
+|Strength|Wind strength of each XYZ axes.|
+|Detail|Randomness of wind direction.|
+|Touch Strength|Strength of deformation by collider using vertex light.|
+
+Point Light used for the touch function works by setting as follows.  
+Due to Unity's limits, you can only touch up to 4 lights.  
+Prefab asset that has already been set is included in the `Prefabs` folder.
+|Name|Description|
+|-|-|
+|Range|Any (the size of the Collider)|
+|Color|RGBA = (0.0, 0.0, 0.0, 0.055)|
+|Mode|Realtime|
+|Intensity|1|
+|Render Mode|Not Important|
+
 # Bug Report
 If you have any other problems and suspect a bug, please contact me on [Twitter](https://twitter.com/lil_xyzw), [GitHub](https://github.com/lilxyzw/lilFurGenerator), or [BOOTH](https://lilxyzw.booth.pm/).  
 Please refer to the following template when reporting a bug.
@@ -62,5 +81,13 @@ Shaders with `FurGenerator` in their display name will be added to the list in t
 See `lilFurGenerator/Shader/lilFurGeneratorUnlit.shader` for fur calculations.
 
 # Change log
-## v1.0
+## v1.0.1
+- Add color code next to HDR color picker
+- Added touch function
+- Fixed UPM import
+- Fixed error in Unity 2019 URP
+- Added shader settings for optimization
+- Moved some processing to the vertex shader for optimization
+- Changed transform calculation
+## v1.0.0
 - Opening to the public
